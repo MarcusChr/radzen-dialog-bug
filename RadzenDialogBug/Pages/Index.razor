@@ -1,0 +1,34 @@
+﻿@page "/"
+@inject DialogService dialogService
+
+<div class="w-50">
+    <div class="row m-4">
+        <RadzenLabel>Step 1:</RadzenLabel>
+        <RadzenButton Click="OpenDialogClosableByEscape">Click me</RadzenButton>
+    </div>
+
+    <div class="row m-4">
+        <RadzenLabel>Step 2:</RadzenLabel>
+        <RadzenButton Click="OpenDialogNotClosableByEscape">Then click me</RadzenButton>
+    </div>
+</div>
+
+@code {
+    private async Task OpenDialogClosableByEscape()
+    {
+        await dialogService.Alert("Step 1: Closable", "I am closable with escape.", new AlertOptions
+        {
+            CloseDialogOnEsc = true,
+            OkButtonText = "Close"
+        });
+    }
+
+    private async Task OpenDialogNotClosableByEscape()
+    {
+        await dialogService.Alert("Step 2: Non-closable", "I am closable with escape, but I shouldn't be.", new AlertOptions
+        {
+            CloseDialogOnEsc = false,
+            OkButtonText = "Close"
+        });
+    }
+}
